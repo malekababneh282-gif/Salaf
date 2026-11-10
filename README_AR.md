@@ -63,3 +63,14 @@ revoke all on table public.loan_inquiries from anon, authenticated;
 - قبل استخدامها تجارياً، تحقق من التفويض والامتثال لقواعد الإعلان والخصوصية وحماية البيانات في العراق.
 - احتفظ بأقل قدر ممكن من البيانات، وحدد من يحق له الوصول إليها وسياسة حذف واضحة.
 - لا تطلب كلمات مرور مصرفية أو OTP أو أرقام بطاقات.
+
+
+## تحديث مجموعة الإدارة
+- أضف `TELEGRAM_GROUP_ID=-5388219884` في Render.
+- أضف `TELEGRAM_WEBHOOK_SECRET` كقيمة طويلة عشوائية.
+- اضبط Telegram webhook على: `https://YOUR-RENDER-DOMAIN/telegram/webhook` مع `secret_token` مطابق.
+- البوت يجب أن يكون مشرفاً في المجموعة.
+- أوامر الإدارة تعمل فقط إذا كان مرسل الأمر مشرفاً فعلياً في المجموعة:
+  `/start`, `/stats`, `/latest`, `/ref XXXXXXXX`, `/status UUID pending|reviewing|completed|rejected`.
+- شغّل ملف `SUPABASE_MIGRATION.sql` بعد أخذ نسخة احتياطية، ولا تنفّذه قبل مراجعة أعمدة الجدول الحالي.
+- لا تغيّر `SUPABASE_SERVICE_ROLE_KEY` أو `TELEGRAM_BOT_TOKEN` إلى قيم ظاهرة في GitHub؛ ضع الأسرار في Render Environment فقط.
